@@ -188,3 +188,19 @@ kubectl apply -f kube/front-app/
 kubectl get deploy,rs,pods,svc
 ```
 
+## Delete cluster created at the start…
+
+```shell
+export KOPS_STATE_STORE=s3://kops.aws.ferreira.cc
+
+kops delete cluster example.aws.ferreira.cc
+
+kops delete cluster example.aws.ferreira.cc --yes
+
+# bucket is still there…
+aws s3 ls
+
+# … but bucket is empty
+aws s3 ls $KOPS_STATE_STORE
+```
+
