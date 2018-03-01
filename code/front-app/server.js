@@ -13,7 +13,7 @@ const handleRequest = function(request, response) {
     });
 
     res.on('end', () => {
-      console.log('Received request for URL: ' + request.url);
+      console.log('Received request for URL: ' + request.url + ' returned body: ' + body);
       response.setHeader('Content-Type', 'application/json');
       response.end(JSON.stringify({ server: body }));
     });

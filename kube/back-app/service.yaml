@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    run: back-app
+  name: back-app
+  selfLink: /api/v1/namespaces/default/services/back-app
+spec:
+  clusterIP: <unknown>
+  ports:
+  - port: 8000
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    run: back-app
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
