@@ -71,6 +71,27 @@
       }
       ```
 
+- [x] Create S3 Bucket for Kops
+
+      ```shell
+      export KOPS_STATE_STORE=s3://kops.aws.ferreira.cc
+
+      # mb = make bucket
+      aws s3 mb $KOPS_STATE_STORE
+      ```
+
+- [x] Create a `demo` cluster to be already setup beforehand *(align names with the `demo-script.md`)*
+
+      ```shell
+      export KOPS_STATE_STORE=s3://kops.aws.ferreira.cc
+
+      kops create cluster demo.aws.ferreira.cc --zones=eu-west-1a --node-count=1
+
+      kops update cluster demo.aws.ferreira.cc --yes
+
+      kops validate cluster
+      ```
+
 ## Prep Code
 
 - [x] Prepare 2 node.js micro services

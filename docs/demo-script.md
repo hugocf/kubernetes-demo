@@ -2,20 +2,17 @@
 
 ## Start with kops…
 
-```shell
-cd ~/Work/Sandbox/kubernetes
+*(show how an `example` cluster  is created with `kops`)*
 
+```shell
 export KOPS_STATE_STORE=s3://kops.aws.ferreira.cc
 
-aws s3 mb $KOPS_STATE_STORE
-aws s3 ls
-
-kops create cluster demo.aws.ferreira.cc --zones=eu-west-1a --node-count=1
+kops create cluster example.aws.ferreira.cc --zones=eu-west-1a --node-count=1
 
 aws s3 ls $KOPS_STATE_STORE
-aws s3 ls $KOPS_STATE_STORE/demo.aws.ferreira.cc/
+aws s3 ls $KOPS_STATE_STORE/example.aws.ferreira.cc/
 
-kops update cluster demo.aws.ferreira.cc --yes
+kops update cluster example.aws.ferreira.cc --yes
 
 kops validate cluster
 ```
@@ -30,14 +27,21 @@ mate code
 ```
 
 - Show `back-app` and `front-app`
-- Show one `Dockerfile`
+- Show that both `Dockerfile` are the same
 
 
 - Open Docker Hub <https://hub.docker.com/r/hugocf/> and show both apps are already there
 
 ## Go back to kops…
 
+*(switch to the pre-build `demo` cluster)*
+
 ```shell
+# Show it is not ready yet...
+kops validate cluster
+
+kubectl config get-context
+
 kubectl config use-context demo.aws.ferreira.cc
 
 kops validate cluster
