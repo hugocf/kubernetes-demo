@@ -19,6 +19,7 @@
 
 ### Miscellaneous
 
+- https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 - https://en.wikipedia.org/wiki/Kubernetes
 - [linux - difference between cgroups and namespaces - Stack Overflow](https://stackoverflow.com/questions/34820558/difference-between-cgroups-and-namespaces)
 - [The Kubernetes Effect](https://www.infoq.com/articles/kubernetes-effect) at InfoQ
