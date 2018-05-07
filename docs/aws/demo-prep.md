@@ -26,13 +26,12 @@
 
 ## Prep AWS
 
-- [x] Create demo IAM user account in AWS
+- [x] Create `demo` IAM user account in AWS
+- [x] Configure `demo` profile with AWS credentials at `~/.aws/config`
 
-- [x] Configure credentials in bash profile
-
-- [x] Create source script to setup credentials. R: `kubernetes.creds`
-
-- [x] Temporarily auto-load above script at the end of `.bash_profile`
+```shell
+export AWS_PROFILE=demo
+```
 
 - [x] Create Route53 hosted zone for `aws.ferreira.cc`
 
@@ -100,7 +99,7 @@ kops validate cluster
 
 - [x] Clear local Docker (except for `openjdk`)
 
-- [x] Setup my public registry on Docker Hub. R: No need, was already done!
+- [x] Setup my public registry on Docker Hub: https://hub.docker.com/r/hugocf
 
 - [x] Ensure `docker login` works on the terminal
 
@@ -117,3 +116,6 @@ docker push hugocf/back-app:0.1
 docker build -t hugocf/front-app:0.1 .
 docker push hugocf/front-app:0.1
 ```
+
+- [x] Delete any app versions other than `front-app:0.1` and `back-app:0.1` in Docker Hub
+
