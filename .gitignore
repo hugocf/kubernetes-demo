@@ -1,4 +1,5 @@
-docs/azure/export.env
-
 _output/
 translations/
+docs/azure/export.env
+docs/azure/clusterDefinition.json
+
