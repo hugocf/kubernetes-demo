@@ -23,12 +23,14 @@ brew update && brew install azure-cli
 
 ```bash
 az login
+
+az ad sp list -o table
 ```
 
 * create a service principal
 
 ```bash
-az ad sp create-for-rbac --name "kubernetes-demo"
+az ad sp create-for-rbac --name "kubernetes-demo" --role="Contributor" --scopes="/subscriptions/7348075e-601f-435c-957b-ef23db3a7a66"
 ```
 
 ```json
@@ -48,7 +50,15 @@ export SERVICEPRINCIPALCLIENTID=
 export SERVICEPRINCIPALCLIENTSECRET=
 export SERVICEPRINCIPALTENANTID=
 
+
 az login --service-principal -u $SERVICEPRINCIPALCLIENTID -p $SERVICEPRINCIPALCLIENTSECRET --tenant $SERVICEPRINCIPALTENANTID
+```
+
+* create an azure resource group
+
+```bash
+az group create -n ee-kubernetes-demo -l "westeurope"
+az group create -n ee-kubernetes-final -l "westeurope"
 ```
 
 * Generate sha key and paste it to the clusterDefinition.json file
@@ -57,11 +67,29 @@ az login --service-principal -u $SERVICEPRINCIPALCLIENTID -p $SERVICEPRINCIPALCL
 cd ~/.ssh/
 ssh-keygen -t rsa
 
-cat kubernetes-demo.pub
+cat ~/.ssh/kubernetes-demo.pub
+
+export SSH_PUBLICKEY=
 ```
 
-* create an azure resource group
+* substitute env variables in clusterDefinition
 
 ```bash
-az group create -n ee-kubernetes-demo -l "westeurope"
+cd kubernetes-demo/docs/azure/
+
+envsubst < clusterDefinition.template.json > clusterDefinition.json
+```
+
+* change dnsPrefix: ee-kube-final
+
+```bash
+acs-engine generate clusterDefinition.json
+
+az group deployment create --name "ee-kubernetes-final-acs" --resource-group "ee-kubernetes-final" --template-file "./_output/ee-kube-final/azuredeploy.json" \
+    --parameters "./_output/ee-kube-final/azuredeploy.parameters.json"
+
+
+export KUBECONFIG=./_output/ee-kube-final/kubeconfig/kubeconfig.westeurope.json
+
+kubectl cluster-info
 ```
