@@ -2,7 +2,7 @@
 
 ## Start with acs-engine
 
-_(show how an `example` cluster is created with `kops`)_
+(show how an `example` cluster is created with `acs-engine`)
 
 * show the clusterDefinition.json file
 
