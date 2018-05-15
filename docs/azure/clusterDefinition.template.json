@@ -1,5 +1,6 @@
 {
   "apiVersion": "vlabs",
+  "location": "westeurope",
   "properties": {
     "orchestratorProfile": {
       "orchestratorType": "Kubernetes"
