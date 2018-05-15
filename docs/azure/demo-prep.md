@@ -57,8 +57,8 @@ az login --service-principal -u $SERVICEPRINCIPALCLIENTID -p $SERVICEPRINCIPALCL
 * create an azure resource group
 
 ```bash
-az group create -n ee-kubernetes-demo -l "westeurope"
-az group create -n ee-kubernetes-final -l "westeurope"
+az group create -n ee-kubernetes-demo -l "westeurope" \
+az group create -n ee-kubernetes-example -l "westeurope"
 ```
 
 * Generate sha key and paste it to the clusterDefinition.json file
@@ -80,16 +80,19 @@ cd kubernetes-demo/docs/azure/
 envsubst < clusterDefinition.template.json > clusterDefinition.json
 ```
 
-* change dnsPrefix: ee-kube-final
+* change dnsPrefix: ee-kube-demo
 
 ```bash
-acs-engine generate clusterDefinition.json
+acs-engine generate --api-model clusterDefinition.json
 
-az group deployment create --name "ee-kubernetes-final-acs" --resource-group "ee-kubernetes-final" --template-file "./_output/ee-kube-final/azuredeploy.json" \
-    --parameters "./_output/ee-kube-final/azuredeploy.parameters.json"
+az group deployment create \
+  --name "ee-kubernetes-demo-acs" \
+  --resource-group "ee-kubernetes-demo" \
+  --template-file "./_output/ee-kube-demo/azuredeploy.json" \
+  --parameters "./_output/ee-kube-demo/azuredeploy.parameters.json"
 
 
-export KUBECONFIG=./_output/ee-kube-final/kubeconfig/kubeconfig.westeurope.json
+export KUBECONFIG=./_output/ee-kube-demo/kubeconfig/kubeconfig.westeurope.json
 
 kubectl cluster-info
 ```

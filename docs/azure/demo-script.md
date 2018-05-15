@@ -9,12 +9,12 @@
 ```bash
 cd ./docs/azure/
 
-envsubst < clusterDefinition.template.json > clusterDefinition.json
+acs-engine generate --api-model clusterDefinition.json
 
-acs-engine generate clusterDefinition.json
-
-az group deployment create --name "ee-kubernetes-demo-acs" --resource-group "ee-kubernetes-demo" --template-file "./_output/ee-kube-demo/azuredeploy.json" \
-    --parameters "./_output/ee-kube-demo/azuredeploy.parameters.json"
+az group deployment create --name "ee-kubernetes-example-acs" \
+  --resource-group "ee-kubernetes-example" \
+  --template-file "./_output/ee-kube-example/azuredeploy.json" \
+  --parameters "./_output/ee-kube-example/azuredeploy.parameters.json"
 ```
 
 * Takes about 10 min. (`0:13–0:23`)
@@ -32,10 +32,10 @@ code .
 
 ## Go back to acs-engine …
 
-* switch to the pre-build `final` cluster
+* switch to the pre-build `demo` cluster
 * show portal and resources created
 
-## MASTERFQDN should be ee-kube-final.westeurope.cloudapp.azure.com
+## MASTERFQDN should be ee-kube-demo.westeurope.cloudapp.azure.com
 
 ```bash
 export KUBECONFIG=`pwd`/_output/ee-kube-demo/kubeconfig/kubeconfig.westeurope.json
@@ -54,8 +54,6 @@ kubectl proxy
 * deploy back-app
 
 ```bash
-kubectl create secret docker-registry regcred --docker-server='https://index.docker.io/v1/' --docker-username=nunofilipecosta --docker-password='' --docker-email='nunofilipe.costa@gmail.com'
-
 kubectl run back-app --image=hugocf/back-app:0.1 --port=8000
 
 kubectl get deploy,rs,pods
@@ -93,3 +91,25 @@ kubectl get deploy,rs,pods,svc
 ```
 
 * show the app running
+
+### OPS
+
+```bash
+kubectl port-forward back-app-??????????-????? 8000 &
+
+http localhost:8000
+
+kill %1
+```
+
+```bash
+kubectl exec -it back-app-??????????-????? -- ls -l
+
+kubectl exec -it back-app-??????????-????? -- sh
+
+env | sort
+```
+
+```bash
+kubectl logs front-app-??????????-?????
+```
