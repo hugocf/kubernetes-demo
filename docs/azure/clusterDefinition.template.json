@@ -8,13 +8,13 @@
     "masterProfile": {
       "count": 1,
       "dnsPrefix": "ee-kube-demo",
-      "vmSize": "Standard_D2_v2"
+      "vmSize": "Standard_D1_v2"
     },
     "agentPoolProfiles": [
       {
         "name": "linuxpool1",
         "count": 2,
-        "vmSize": "Standard_D2_v2",
+        "vmSize": "Standard_D1_v2",
         "availabilityProfile": "AvailabilitySet"
       }
     ],

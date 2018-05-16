@@ -30,7 +30,9 @@ az ad sp list -o table
 * create a service principal
 
 ```bash
-az ad sp create-for-rbac --name "kubernetes-demo" --role="Contributor" --scopes="/subscriptions/7348075e-601f-435c-957b-ef23db3a7a66"
+az account list -o table
+
+az ad sp create-for-rbac --name "kubernetes-demo" --role="Contributor" --scopes="/subscriptions/<subscriptionId>"
 ```
 
 ```json
@@ -57,7 +59,7 @@ az login --service-principal -u $SERVICEPRINCIPALCLIENTID -p $SERVICEPRINCIPALCL
 * create an azure resource group
 
 ```bash
-az group create -n ee-kubernetes-demo -l "westeurope" \
+az group create -n ee-kubernetes-demo -l "westeurope" &&
 az group create -n ee-kubernetes-example -l "westeurope"
 ```
 
