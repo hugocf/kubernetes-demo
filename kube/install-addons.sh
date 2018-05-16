@@ -8,4 +8,4 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/kops/master/addons
 echo
 echo "### Installing Kubernetes Dashboard ###"
 echo
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kops/master/addons/kubernetes-dashboard/v1.7.1.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/kops/master/addons/kubernetes-dashboard/v1.8.3.yaml
