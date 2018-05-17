@@ -40,7 +40,7 @@ mate code
 # Show it is not ready yet...
 kops validate cluster
 
-kubectl config get-context
+kubectl config get-contexts
 
 kubectl config use-context demo.aws.ferreira.cc
 
